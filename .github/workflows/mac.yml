@@ -1,0 +1,21 @@
+name: Build on macOS
+on:
+  workflow_dispatch:
+    inputs:
+      dmg:
+        description: "Opentrons dmg filename"
+        required: true
+        default: "Opentrons-v4.5.0-mac-b12575.dmg"
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Put cask in place
+        run: |
+          brew update
+          prefix=`brew --prefix`
+          ls "$prefix/Library/Taps/homebrew/homebrew-cask/Casks"
+          echo "dmg is: ${{ github.event.inputs.dmg }}"
