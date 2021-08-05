@@ -17,5 +17,5 @@ jobs:
         run: |
           brew update
           prefix=`brew --prefix`
-          ls "$prefix/Library/Taps/homebrew/homebrew-cask/Casks"
+          ls "$prefix/Library/Taps/homebrew-cask/Casks"
           echo "dmg is: ${{ github.event.inputs.dmg }}"
