@@ -16,7 +16,7 @@ jobs:
       - name: Brew update.
         run: brew update
       - name: Replace Cask url with variable.
-        run: python replace_url.py ${{ github.event.inputs.dmg-url }}
+        run: python3 replace_url.py ${{ github.event.inputs.dmg-url }}
       - name: Move the cask in place and install.
         run: |
           prefix=`brew --prefix`
