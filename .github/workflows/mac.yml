@@ -18,4 +18,6 @@ jobs:
           brew update
           echo "dmg is: ${{ github.event.inputs.dmg }}"
           prefix=`brew --prefix`
-          ls "$prefix/homebrew/Library/Taps/homebrew"
+          target="$prefix/homebrew/Library/Taps/homebrew/homebrew-cask"
+          mv opentrons.rb "$target/opentrons.rb"
+          brew install opentrons
