@@ -16,6 +16,7 @@ jobs:
       - name: Put cask in place
         run: |
           brew update
-          prefix=`brew --prefix`
-          ls "$prefix/Library/Taps/homebrew-cask/Casks"
           echo "dmg is: ${{ github.event.inputs.dmg }}"
+          prefix=`brew --prefix`
+          ls "$prefix/Library/Taps/homebrew/cask"
+          ls "$prefix/Library/Taps

@@ -17,4 +17,4 @@ jobs:
         run: |
           Get-ChildItem
           choco --version
-          Write-Output "exe is: ${{ github.event.inputs.dmg }}"
+          Write-Output "exe is: ${{ github.event.inputs.exe }}"
