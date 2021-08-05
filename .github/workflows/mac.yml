@@ -17,9 +17,10 @@ jobs:
         run: brew update
       - name: Replace Cask url with variable.
         run: python3 replace_url.py ${{ github.event.inputs.dmg-url }}
-      - name: Move the cask in place and install.
+      - name: Move the cask into the core tap.
         run: |
           prefix=`brew --prefix`
           target="$prefix/homebrew/Library/Taps/homebrew/homebrew-cask/Casks/opentrons.rb"
           mv opentrons.rb $target
-          brew install opentrons
+      - name: 🍺 Install Opentrons.
+        run: brew install opentrons
