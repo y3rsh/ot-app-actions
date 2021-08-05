@@ -2,10 +2,10 @@ name: Build on macOS
 on:
   workflow_dispatch:
     inputs:
-      dmg:
-        description: "Opentrons dmg filename"
+      dmg-url:
+        description: "Opentrons dmg URL"
         required: true
-        default: "Opentrons-v4.5.0-mac-b12575.dmg"
+        default: "https://s3.amazonaws.com/opentrons-app/builds/Opentrons-v4.5.0-mac-b12575.dmg"
 
 jobs:
   build:
@@ -16,9 +16,10 @@ jobs:
       - name: Put cask in place
         run: |
           brew update
-          echo "dmg is: ${{ github.event.inputs.dmg }}"
+          echo "dmg-url is: ${{ github.event.inputs.dmg-url }}"
+          { rm opentrons.rb && awk '{gsub("url", "url \"${{ github.event.inputs.dmg-url }}\""); print}' > opentrons.rb; }
+< opentrons.rb
           prefix=`brew --prefix`
-          target="$prefix/homebrew/Library/Taps/homebrew/homebrew-cask/Casks"
-          mv opentrons.rb "$target/opentrons.rb"
-          ls $target
+          target="$prefix/homebrew/Library/Taps/homebrew/homebrew-cask/Casks/opentrons.rb"
+          mv opentrons.rb $target
           brew install opentrons
