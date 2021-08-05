@@ -1,4 +1,4 @@
-name: Opentrons App installed on macOS
+name: Opentrons App on macOS
 on:
   workflow_dispatch:
     inputs:
