@@ -13,13 +13,11 @@ jobs:
     steps:
       - name: Check out repository code.
         uses: actions/checkout@v2
-      - name: Brew update
-        run: |
-          brew update
+      - name: Brew update.
+        run: brew update
       - name: Replace url with variable.
         run:
-          "{ rm opentrons.rb && awk '{gsub(\"url\", \"url \"${{ github.event.inputs.dmg-url }}\"\"); print}' > opentrons.rb; }
-< opentrons.rb'"
+          "{ rm opentrons.rb && awk '{gsub(\"url\", \"url ${{ github.event.inputs.dmg-url }}\"); print}' > opentrons.rb; } < opentrons.rb"
       - name: Move the cask in place and install.
         run: |
           prefix=`brew --prefix`
