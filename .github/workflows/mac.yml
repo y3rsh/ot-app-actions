@@ -11,14 +11,17 @@ jobs:
   build:
     runs-on: macos-latest
     steps:
-      - name: Check out repository code
+      - name: Check out repository code.
         uses: actions/checkout@v2
-      - name: Put cask in place
+      - name: Brew update
         run: |
           brew update
-          echo "dmg-url is: ${{ github.event.inputs.dmg-url }}"
-          { rm opentrons.rb && awk '{gsub("url", "url \"${{ github.event.inputs.dmg-url }}\""); print}' > opentrons.rb; }
-< opentrons.rb
+      - name: Replace url with variable.
+        run:
+          "{ rm opentrons.rb && awk '{gsub(\"url\", \"url \"${{ github.event.inputs.dmg-url }}\"\"); print}' > opentrons.rb; }
+< opentrons.rb'"
+      - name: Move the cask in place and install.
+        run: |
           prefix=`brew --prefix`
           target="$prefix/homebrew/Library/Taps/homebrew/homebrew-cask/Casks/opentrons.rb"
           mv opentrons.rb $target
