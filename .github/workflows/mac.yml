@@ -18,4 +18,4 @@ jobs:
           brew update
           echo "dmg is: ${{ github.event.inputs.dmg }}"
           prefix=`brew --prefix`
-          ls "$prefix/homebrew/Library/Taps"
+          ls "$prefix/homebrew/Library/Taps/homebrew"
