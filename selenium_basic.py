@@ -1,8 +1,10 @@
 import os
 import logging
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 logger = logging.getLogger(__name__)
 
@@ -23,10 +25,14 @@ options.add_argument("disable-popup-blocking")
 options.add_argument("allow-elevated-browser")
 options.add_argument("verbose")
 
+def wait_for_spinner_visible(driver) -> None:
+    """Wait for spinner to become visible.  This should take ~1 seconds."""
+    spinner: tuple = (By.CSS_SELECTOR, "svg[class*=spin]")
+    WebDriverWait(driver, 2).until(
+        EC.visibility_of_element_located(spinner)
+    )
 
 driver = webdriver.Chrome(options=options)
-driver.get("https://opentrons.com")
-assert "Opentrons" in driver.title
-assert "$5,000" in driver.page_source
+wait_for_spinner_visible(driver)
 driver.save_screenshot("screenshot.png")
 driver.close()
