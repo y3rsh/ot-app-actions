@@ -36,7 +36,7 @@ jobs:
       - name: Use selenium.
         run: |
           pip3 install -U selenium
-          EXECUTABLE_PATH=/Applications/Opentrons.app/Contents/MacOS/Opentrons
+          export EXECUTABLE_PATH="/Applications/Opentrons.app/Contents/MacOS/Opentrons"
           python3 selenium_basic.py
       - name: Archive pic.
         uses: actions/upload-artifact@v2
