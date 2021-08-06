@@ -32,3 +32,4 @@ jobs:
         run: |
           chmod +x ./mac_get_chromedriver.sh
           ./mac_get_chromedriver.sh ${{ github.event.inputs.chromedriver-version }}
+          chromedriver --version
