@@ -33,12 +33,9 @@ jobs:
           chmod +x ./mac_get_chromedriver.sh
           ./mac_get_chromedriver.sh ${{ github.event.inputs.chromedriver-version }}
           chromedriver --version
-      - name: Install python dependencies
-        run: |
-          pip3 install -U pipenv
-          pipenv install --system --skip-lock
       - name: Use selenium.
         run: |
+          pip3 install -U selenium
           EXECUTABLE_PATH=/Applications/Opentrons.app/Contents/MacOS/Opentrons
           python3 selenium_basic.py
       - name: Archive pic.
