@@ -3,9 +3,13 @@ on:
   workflow_dispatch:
     inputs:
       dmg-url:
-        description: "Opentrons dmg URL"
+        description: "Opentrons dmg URL."
         required: true
         default: "https://s3.amazonaws.com/opentrons-app/builds/Opentrons-v4.5.0-mac-b12575.dmg"
+      chromedriver-version:
+        description: "Chromedriver binary version."
+        required: true
+        default: "76.0.3809.126"
 
 jobs:
   build:
@@ -22,5 +26,7 @@ jobs:
           prefix=`brew --prefix`
           target="$prefix/homebrew/Library/Taps/homebrew/homebrew-cask/Casks/opentrons.rb"
           mv opentrons.rb $target
-      - name: 🍺 Install Opentrons.
+      - name: 🍺  Install Opentrons.
         run: brew install opentrons
+      - name: Install Chromedriver on the path.
+        run: mac_get_chromedriver.sh ${{ github.event.inputs.chromedriver-version }}
